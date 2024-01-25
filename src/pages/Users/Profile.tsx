@@ -28,7 +28,7 @@ const Profile = () => {
     const { data: userProfile, loading, error } = useAppSelector((state) => state.userProfileReducer);
 
     useEffect(() => {
-        dispatch(setPageTitle('Profile'));
+        dispatch(setPagzeTitle('Profile'));
     });
 
     useEffect(() => {

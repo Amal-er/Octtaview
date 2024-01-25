@@ -223,15 +223,13 @@ const userSchema=new mongoose.Schema({
     },
     referalStatus:{
       type: String,
-      enum: ["initiated", "approved"],
+    
     },
     addFundStatus:{
       type: String,
-      enum: ["pending", "approved"],
     },
     addPackageStatus:{
-      type: String,
-      enum: ["pending", "approved"],
+      type: String
     },
     userStatus: {
         type: String,
