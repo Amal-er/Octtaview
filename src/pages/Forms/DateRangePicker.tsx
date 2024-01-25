@@ -6,8 +6,8 @@ import 'flatpickr/dist/flatpickr.css';
 import Nouislider from '@x1mrdonut1x/nouislider-react';
 import 'nouislider/distribute/nouislider.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { IRootState } from '../../store';
-import { setPageTitle } from '../../store/themeConfigSlice';
+import { IRootState } from '../../Slice';
+import { setPageTitle } from '../../Slice/themeConfigSlice';
 import IconBell from '../../components/Icon/IconBell';
 import IconCode from '../../components/Icon/IconCode';
 

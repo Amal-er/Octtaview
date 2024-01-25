@@ -1,9 +1,12 @@
-import { DataTable } from 'mantine-datatable';
+import { DataTable, DataTableSortStatus } from 'mantine-datatable';
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { setPageTitle } from '../../store/themeConfigSlice';
+import sortBy from 'lodash/sortBy';
+import { useDispatch, useSelector } from 'react-redux';
+import { IRootState } from '../../Slice';
+import Dropdown from '../../components/Dropdown';
+import { setPageTitle } from '../../Slice/themeConfigSlice';
 import IconBell from '../../components/Icon/IconBell';
-import { Header } from '@mantine/core';
+import IconCaretDown from '../../components/Icon/IconCaretDown';
 import Headers from '../../components/Layouts/Header';
 
 const rowData = [
@@ -509,20 +512,58 @@ const rowData = [
     },
 ];
 
-const Skin = () => {
+const ReportStatus = () => {
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(setPageTitle('Skin Tables'));
+        dispatch(setPageTitle('Column Chooser Table'));
     });
-    const PAGE_SIZES = [10, 20, 30, 50, 100];
+    const isRtl = useSelector((state: IRootState) => state.themeConfig.rtlClass) === 'rtl' ? true : false;
 
-    //Skin: Striped
+    // show/hide
     const [page, setPage] = useState(1);
+    const PAGE_SIZES = [10, 20, 30, 50, 100];
     const [pageSize, setPageSize] = useState(PAGE_SIZES[0]);
-    const [initialRecords, setInitialRecords] = useState(rowData);
+    const [initialRecords, setInitialRecords] = useState(sortBy(rowData, 'id'));
     const [recordsData, setRecordsData] = useState(initialRecords);
 
     const [search, setSearch] = useState('');
+    const [sortStatus, setSortStatus] = useState<DataTableSortStatus>({
+        columnAccessor: 'id',
+        direction: 'asc',
+    });
+
+    const [hideCols, setHideCols] = useState<any>(['age', 'dob', 'isActive']);
+
+    const formatDate = (date: any) => {
+        if (date) {
+            const dt = new Date(date);
+            const month = dt.getMonth() + 1 < 10 ? '0' + (dt.getMonth() + 1) : dt.getMonth() + 1;
+            const day = dt.getDate() < 10 ? '0' + dt.getDate() : dt.getDate();
+            return day + '/' + month + '/' + dt.getFullYear();
+        }
+        return '';
+    };
+
+    const showHideColumns = (col: any, value: any) => {
+        if (hideCols.includes(col)) {
+            setHideCols((col: any) => hideCols.filter((d: any) => d !== col));
+        } else {
+            setHideCols([...hideCols, col]);
+        }
+    };
+
+    const cols = [
+        { accessor: 'id', title: 'ID' },
+        { accessor: 'firstName', title: 'First Name' },
+        { accessor: 'lastName', title: 'Last Name' },
+        { accessor: 'email', title: 'Email' },
+        { accessor: 'phone', title: 'Phone' },
+        { accessor: 'company', title: 'Company' },
+        { accessor: 'address.street', title: 'Address' },
+        { accessor: 'age', title: 'Age' },
+        { accessor: 'dob', title: 'Birthdate' },
+        { accessor: 'isActive', title: 'Active' },
+    ];
 
     useEffect(() => {
         setPage(1);
@@ -541,7 +582,10 @@ const Skin = () => {
                     item.id.toString().includes(search.toLowerCase()) ||
                     item.firstName.toLowerCase().includes(search.toLowerCase()) ||
                     item.lastName.toLowerCase().includes(search.toLowerCase()) ||
+                    item.company.toLowerCase().includes(search.toLowerCase()) ||
                     item.email.toLowerCase().includes(search.toLowerCase()) ||
+                    item.age.toString().toLowerCase().includes(search.toLowerCase()) ||
+                    item.dob.toLowerCase().includes(search.toLowerCase()) ||
                     item.phone.toLowerCase().includes(search.toLowerCase())
                 );
             });
@@ -549,140 +593,15 @@ const Skin = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [search]);
 
-    //Skin: Hover
-    const [page1, setPage1] = useState(1);
-    const [pageSize1, setPageSize1] = useState(PAGE_SIZES[0]);
-    const [initialRecords1, setInitialRecords1] = useState(rowData);
-    const [recordsData1, setRecordsData1] = useState(initialRecords1);
-
-    const [search1, setSearch1] = useState('');
-
     useEffect(() => {
-        setPage1(1);
-    }, [pageSize1]);
-
-    useEffect(() => {
-        const from = (page1 - 1) * pageSize1;
-        const to = from + pageSize1;
-        setRecordsData1([...initialRecords1.slice(from, to)]);
-    }, [page1, pageSize1, initialRecords1]);
-
-    useEffect(() => {
-        setInitialRecords1(() => {
-            return rowData.filter((item) => {
-                return (
-                    item.id.toString().includes(search1.toLowerCase()) ||
-                    item.firstName.toLowerCase().includes(search1.toLowerCase()) ||
-                    item.lastName.toLowerCase().includes(search1.toLowerCase()) ||
-                    item.email.toLowerCase().includes(search1.toLowerCase()) ||
-                    item.phone.toLowerCase().includes(search1.toLowerCase())
-                );
-            });
-        });
+        const data = sortBy(initialRecords, sortStatus.columnAccessor);
+        setInitialRecords(sortStatus.direction === 'desc' ? data.reverse() : data);
+        setPage(1);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [search1]);
-
-    //Skin: Bordered
-    const [page2, setPage2] = useState(1);
-    const [pageSize2, setPageSize2] = useState(PAGE_SIZES[0]);
-    const [initialRecords2, setInitialRecords2] = useState(rowData);
-    const [recordsData2, setRecordsData2] = useState(initialRecords2);
-
-    const [search2, setSearch2] = useState('');
-
-    useEffect(() => {
-        setPage2(1);
-    }, [pageSize2]);
-
-    useEffect(() => {
-        const from = (page2 - 1) * pageSize2;
-        const to = from + pageSize2;
-        setRecordsData2([...initialRecords2.slice(from, to)]);
-    }, [page2, pageSize2, initialRecords2]);
-
-    useEffect(() => {
-        setInitialRecords2(() => {
-            return rowData.filter((item) => {
-                return (
-                    item.id.toString().includes(search2.toLowerCase()) ||
-                    item.firstName.toLowerCase().includes(search2.toLowerCase()) ||
-                    item.lastName.toLowerCase().includes(search2.toLowerCase()) ||
-                    item.email.toLowerCase().includes(search2.toLowerCase()) ||
-                    item.phone.toLowerCase().includes(search2.toLowerCase())
-                );
-            });
-        });
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [search2]);
-
-    //Skin: Compact
-    const [page3, setPage3] = useState(1);
-    const [pageSize3, setPageSize3] = useState(PAGE_SIZES[0]);
-    const [initialRecords3, setInitialRecords3] = useState(rowData);
-    const [recordsData3, setRecordsData3] = useState(initialRecords3);
-
-    const [search3, setSearch3] = useState('');
-
-    useEffect(() => {
-        setPage3(1);
-    }, [pageSize3]);
-
-    useEffect(() => {
-        const from = (page3 - 1) * pageSize3;
-        const to = from + pageSize3;
-        setRecordsData3([...initialRecords3.slice(from, to)]);
-    }, [page3, pageSize3, initialRecords3]);
-
-    useEffect(() => {
-        setInitialRecords3(() => {
-            return rowData.filter((item) => {
-                return (
-                    item.id.toString().includes(search3.toLowerCase()) ||
-                    item.firstName.toLowerCase().includes(search3.toLowerCase()) ||
-                    item.lastName.toLowerCase().includes(search3.toLowerCase()) ||
-                    item.email.toLowerCase().includes(search3.toLowerCase()) ||
-                    item.phone.toLowerCase().includes(search3.toLowerCase())
-                );
-            });
-        });
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [search3]);
-
-    //Skin: All
-    const [page4, setPage4] = useState(1);
-    const [pageSize4, setPageSize4] = useState(PAGE_SIZES[0]);
-    const [initialRecords4, setInitialRecords4] = useState(rowData);
-    const [recordsData4, setRecordsData4] = useState(initialRecords4);
-
-    const [search4, setSearch4] = useState('');
-
-    useEffect(() => {
-        setPage4(1);
-    }, [pageSize4]);
-
-    useEffect(() => {
-        const from = (page4 - 1) * pageSize4;
-        const to = from + pageSize4;
-        setRecordsData4([...initialRecords4.slice(from, to)]);
-    }, [page4, pageSize4, initialRecords4]);
-
-    useEffect(() => {
-        setInitialRecords4(() => {
-            return rowData.filter((item) => {
-                return (
-                    item.id.toString().includes(search4.toLowerCase()) ||
-                    item.firstName.toLowerCase().includes(search4.toLowerCase()) ||
-                    item.lastName.toLowerCase().includes(search4.toLowerCase()) ||
-                    item.email.toLowerCase().includes(search4.toLowerCase()) ||
-                    item.phone.toLowerCase().includes(search4.toLowerCase())
-                );
-            });
-        });
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [search4]);
+    }, [sortStatus]);
 
     return (
-        <div className="space-y-6">
+        <div>
             <Headers />
             {/* <div className="panel flex items-center overflow-x-auto whitespace-nowrap p-3 text-primary">
                 <div className="rounded-full bg-primary p-1.5 text-white ring-2 ring-primary/30 ltr:mr-3 rtl:ml-3">
@@ -693,30 +612,122 @@ const Skin = () => {
                     https://www.npmjs.com/package/mantine-datatable
                 </a>
             </div> */}
-            {/* Skin: Striped  */}
-            <div className="panel">
-                <div className="flex items-center justify-between mb-5">
-                    <h5 className="font-semibold text-lg dark:text-white-light">My Direct Team</h5>
-                    <input type="text" className="form-input w-auto" placeholder="Search..." value={search} onChange={(e) => setSearch(e.target.value)} />
+
+            <div className="panel mt-6">
+                <div className="flex md:items-center md:flex-row flex-col mb-5 gap-5">
+                    <h5 className="font-semibold text-lg dark:text-white-light">Withdraw History</h5>
+                    <div className="flex items-center gap-5 ltr:ml-auto rtl:mr-auto">
+                        <div className="flex md:items-center md:flex-row flex-col gap-5">
+                            <div className="dropdown">
+                                <Dropdown
+                                    placement={`${isRtl ? 'bottom-end' : 'bottom-start'}`}
+                                    btnClassName="!flex items-center border font-semibold border-white-light dark:border-[#253b5c] rounded-md px-4 py-2 text-sm dark:bg-[#1b2e4b] dark:text-white-dark"
+                                    button={
+                                        <>
+                                            <span className="ltr:mr-1 rtl:ml-1">Columns</span>
+                                            <IconCaretDown className="w-5 h-5" />
+                                        </>
+                                    }
+                                >
+                                    <ul className="!min-w-[140px]">
+                                        {cols.map((col, i) => {
+                                            return (
+                                                <li
+                                                    key={i}
+                                                    className="flex flex-col"
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                    }}
+                                                >
+                                                    <div className="flex items-center px-4 py-1">
+                                                        <label className="cursor-pointer mb-0">
+                                                            <input
+                                                                type="checkbox"
+                                                                checked={!hideCols.includes(col.accessor)}
+                                                                className="form-checkbox"
+                                                                defaultValue={col.accessor}
+                                                                onChange={(event: any) => {
+                                                                    setHideCols(event.target.value);
+                                                                    showHideColumns(col.accessor, event.target.checked);
+                                                                }}
+                                                            />
+                                                            <span className="ltr:ml-2 rtl:mr-2">{col.title}</span>
+                                                        </label>
+                                                    </div>
+                                                </li>
+                                            );
+                                        })}
+                                    </ul>
+                                </Dropdown>
+                            </div>
+                        </div>
+                        <div className="text-right">
+                            <input type="text" className="form-input" placeholder="Search..." value={search} onChange={(e) => setSearch(e.target.value)} />
+                        </div>
+                    </div>
                 </div>
                 <div className="datatables">
                     <DataTable
-                        striped
-                        className="whitespace-nowrap table-striped"
+                        className="whitespace-nowrap table-hover"
                         records={recordsData}
                         columns={[
-                            { accessor: 'id', title: 'ID' },
-                            { accessor: 'firstName', title: 'First Name' },
-                            { accessor: 'lastName', title: 'Last Name' },
-                            { accessor: 'email' },
-                            { accessor: 'phone', title: 'Phone No.' },
+                            { accessor: 'id', title: 'ID', sortable: true, hidden: hideCols.includes('id') },
+                            {
+                                accessor: 'firstName',
+                                title: 'First Name',
+                                sortable: true,
+                                hidden: hideCols.includes('firstName'),
+                            },
+                            {
+                                accessor: 'lastName',
+                                title: 'Last Name',
+                                sortable: true,
+                                hidden: hideCols.includes('lastName'),
+                            },
+                            { accessor: 'email', title: 'Email', sortable: true, hidden: hideCols.includes('email') },
+                            { accessor: 'phone', title: 'Phone', sortable: true, hidden: hideCols.includes('phone') },
+                            {
+                                accessor: 'company',
+                                title: 'Company',
+                                sortable: true,
+                                hidden: hideCols.includes('company'),
+                            },
+                            {
+                                accessor: 'address.street',
+                                title: 'Address',
+                                sortable: true,
+                                hidden: hideCols.includes('address.street'),
+                            },
+                            {
+                                accessor: 'age',
+                                title: 'Age',
+                                sortable: true,
+                                hidden: hideCols.includes('age'),
+                            },
+                            {
+                                accessor: 'dob',
+                                title: 'Birthdate',
+                                sortable: true,
+                                hidden: hideCols.includes('dob'),
+                                render: ({ dob }) => <div>{formatDate(dob)}</div>,
+                            },
+                            {
+                                accessor: 'isActive',
+                                title: 'Active',
+                                sortable: true,
+                                hidden: hideCols.includes('isActive'),
+                                render: ({ isActive }) => <div className={`${isActive ? 'text-success' : 'text-danger'} capitalize`}>{isActive.toString()}</div>,
+                            },
                         ]}
+                        highlightOnHover
                         totalRecords={initialRecords.length}
                         recordsPerPage={pageSize}
                         page={page}
                         onPageChange={(p) => setPage(p)}
                         recordsPerPageOptions={PAGE_SIZES}
                         onRecordsPerPageChange={setPageSize}
+                        sortStatus={sortStatus}
+                        onSortStatusChange={setSortStatus}
                         minHeight={200}
                         paginationText={({ from, to, totalRecords }) => `Showing  ${from} to ${to} of ${totalRecords} entries`}
                     />
@@ -726,4 +737,4 @@ const Skin = () => {
     );
 };
 
-export default Skin;
+export default ReportStatus;

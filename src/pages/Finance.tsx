@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom';
 import Dropdown from '../components/Dropdown';
 import ReactApexChart from 'react-apexcharts';
 import { useDispatch, useSelector } from 'react-redux';
-import { IRootState } from '../store';
-import { setPageTitle } from '../store/themeConfigSlice';
+import { IRootState } from '../Slice';
+import { setPageTitle } from '../Slice/themeConfigSlice';
 import { useEffect } from 'react';
 import IconHorizontalDots from '../components/Icon/IconHorizontalDots';
 import IconEye from '../components/Icon/IconEye';
@@ -19,7 +19,7 @@ import IconInfoCircle from '../components/Icon/IconInfoCircle';
 const Finance = () => {
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(setPageTitle('Finance'));
+        dispatch(setPageTitle('OCTTAVIEW'));
     });
     //bitcoinoption
     const bitcoin: any = {
@@ -398,7 +398,7 @@ const Finance = () => {
                     </Link>
                 </li>
                 <li className="before:content-['/'] ltr:before:mr-2 rtl:before:ml-2">
-                    <span>Finance</span>
+                    <span>Octtaview</span>
                 </li>
             </ul>
             <div className="pt-5">

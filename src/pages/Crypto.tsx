@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { IRootState } from '../store';
+import { IRootState } from '../Slice';
 import { Link } from 'react-router-dom';
 import ReactApexChart from 'react-apexcharts';
 import Dropdown from '../components/Dropdown';
-import { setPageTitle } from '../store/themeConfigSlice';
+import { setPageTitle } from '../Slice/themeConfigSlice';
 import IconArrowLeft from '../components/Icon/IconArrowLeft';
 import IconMenu from '../components/Icon/IconMenu';
 import IconCaretDown from '../components/Icon/IconCaretDown';

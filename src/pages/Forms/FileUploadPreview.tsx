@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import CodeHighlight from '../../components/Highlight';
 import ImageUploading, { ImageListType } from 'react-images-uploading';
-import { setPageTitle } from '../../store/themeConfigSlice';
+import { setPageTitle } from '../../Slice/themeConfigSlice';
 import { useDispatch } from 'react-redux';
 import IconBell from '../../components/Icon/IconBell';
 import IconCode from '../../components/Icon/IconCode';
@@ -201,7 +201,7 @@ const onChange = (imageList: ImageListType, addUpdateIndex: number[] | undefined
                                                             title="Clear Image"
                                                             onClick={() => onImageRemove(index)}
                                                         >
-                                                            <IconX className="w-3 h-3"/>
+                                                            <IconX className="w-3 h-3" />
                                                         </button>
                                                         <img src={image.dataURL} alt="img" className="object-cover shadow rounded w-full !max-h-48" />
                                                     </div>

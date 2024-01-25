@@ -4,9 +4,9 @@ import { DataTable, DataTableSortStatus } from 'mantine-datatable';
 import { useEffect, useState } from 'react';
 import sortBy from 'lodash/sortBy';
 import { useDispatch, useSelector } from 'react-redux';
-import { IRootState } from '../../store';
+import { IRootState } from '../../Slice';
 import Dropdown from '../../components/Dropdown';
-import { setPageTitle } from '../../store/themeConfigSlice';
+import { setPageTitle } from '../../Slice/themeConfigSlice';
 import IconBell from '../../components/Icon/IconBell';
 import IconCaretDown from '../../components/Icon/IconCaretDown';
 import Headers from '../../components/Layouts/Header';
@@ -617,7 +617,7 @@ const Levelincome = () => {
 
             <div className="panel mt-6">
                 <div className="flex md:items-center md:flex-row flex-col mb-5 gap-5">
-                    <h5 className="font-semibold text-lg dark:text-white-light">My Team</h5>
+                    <h5 className="font-semibold text-lg dark:text-white-light">Level Income</h5>
                     <div className="flex items-center gap-5 ltr:ml-auto rtl:mr-auto">
                         <div className="flex md:items-center md:flex-row flex-col gap-5">
                             <div className="dropdown">

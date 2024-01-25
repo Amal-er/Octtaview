@@ -1,10 +1,10 @@
 import { DataTable } from 'mantine-datatable';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { setPageTitle } from '../../store/themeConfigSlice';
+import { setPageTitle } from '../../Slice/themeConfigSlice';
 import IconBell from '../../components/Icon/IconBell';
-import { Header } from '@mantine/core';
-import Headers from '../../components/Layouts/Header';
+// import { Header } from '@mantine/core';
+// import Headers from '../../components/Layouts/Header';
 
 const rowData = [
     {
@@ -542,7 +542,7 @@ const Basic = () => {
                 </a>
             </div> */}
             <div className="panel mt-6">
-                <h5 className="font-semibold text-lg dark:text-white-light mb-5">Basic</h5>
+                <h5 className="font-semibold text-lg dark:text-white-light mb-5">Direct Income</h5>
                 <div className="datatables">
                     <DataTable
                         noRecordsText="No results match your search query"

@@ -2,9 +2,9 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import CodeHighlight from '../../components/Highlight';
 import { useDispatch, useSelector } from 'react-redux';
-import { IRootState } from '../../store';
+import { IRootState } from '../../Slice';
 import Dropdown from '../../components/Dropdown';
-import { setPageTitle } from '../../store/themeConfigSlice';
+import { setPageTitle } from '../../Slice/themeConfigSlice';
 import IconBell from '../../components/Icon/IconBell';
 import IconCode from '../../components/Icon/IconCode';
 import IconCaretDown from '../../components/Icon/IconCaretDown';
@@ -1278,9 +1278,7 @@ const isRtl = useSelector((state: IRootState) => state.themeConfig.rtlClass) ===
                                         <Dropdown
                                             placement={`${isRtl ? 'top-end' : 'top-start'}`}
                                             btnClassName="btn p-0 rounded-none border-0 shadow-none dropdown-toggle text-black dark:text-white-dark hover:text-primary dark:hover:text-primary"
-                                            button={
-                                                <IconHorizontalDots className="w-6 h-6 rotate-90 opacity-70" />
-                                            }
+                                            button={<IconHorizontalDots className="w-6 h-6 rotate-90 opacity-70" />}
                                         >
                                             <ul className="!min-w-[170px]">
                                                 <li>
@@ -1304,9 +1302,7 @@ const isRtl = useSelector((state: IRootState) => state.themeConfig.rtlClass) ===
                                         <Dropdown
                                             placement={`${isRtl ? 'top-end' : 'top-start'}`}
                                             btnClassName="btn p-0 rounded-none border-0 shadow-none dropdown-toggle text-black dark:text-white-dark hover:text-primary dark:hover:text-primary"
-                                            button={
-                                                <IconHorizontalDots className="w-6 h-6 opacity-70" />
-                                            }
+                                            button={<IconHorizontalDots className="w-6 h-6 opacity-70" />}
                                         >
                                             <ul className="!min-w-[170px]">
                                                 <li>
@@ -1330,9 +1326,7 @@ const isRtl = useSelector((state: IRootState) => state.themeConfig.rtlClass) ===
                                         <Dropdown
                                             placement={`${isRtl ? 'top-end' : 'top-start'}`}
                                             btnClassName="btn p-0 rounded-none border-0 shadow-none dropdown-toggle text-black dark:text-white-dark hover:text-primary dark:hover:text-primary"
-                                            button={
-                                                <IconHorizontalDots className="w-6 h-6 rotate-90 opacity-70" />
-                                            }
+                                            button={<IconHorizontalDots className="w-6 h-6 rotate-90 opacity-70" />}
                                         >
                                             <ul className="!min-w-[170px]">
                                                 <li>
@@ -1356,9 +1350,7 @@ const isRtl = useSelector((state: IRootState) => state.themeConfig.rtlClass) ===
                                         <Dropdown
                                             placement={`${isRtl ? 'top-start' : 'top-end'}`}
                                             btnClassName="btn p-0 rounded-none border-0 shadow-none dropdown-toggle text-black dark:text-white-dark hover:text-primary dark:hover:text-primary"
-                                            button={
-                                                <IconHorizontalDots className="w-6 h-6 opacity-70" />
-                                            }
+                                            button={<IconHorizontalDots className="w-6 h-6 opacity-70" />}
                                         >
                                             <ul className="!min-w-[170px]">
                                                 <li>

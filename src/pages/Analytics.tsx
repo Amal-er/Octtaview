@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 import ReactApexChart from 'react-apexcharts';
 import { useDispatch, useSelector } from 'react-redux';
-import { IRootState } from '../store';
+import { IRootState } from '../Slice';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import Dropdown from '../components/Dropdown';
 import { useEffect } from 'react';
-import { setPageTitle } from '../store/themeConfigSlice';
+import { setPageTitle } from '../Slice/themeConfigSlice';
 import IconHorizontalDots from '../components/Icon/IconHorizontalDots';
 import IconTrendingUp from '../components/Icon/IconTrendingUp';
 import IconPlus from '../components/Icon/IconPlus';

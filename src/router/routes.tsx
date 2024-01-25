@@ -7,7 +7,7 @@ const Crypto = lazy(() => import('../pages/Crypto'));
 const Todolist = lazy(() => import('../pages/Apps/Todolist'));
 const Mailbox = lazy(() => import('../pages/Apps/Mailbox'));
 const Notes = lazy(() => import('../pages/Apps/Notes'));
-const Contacts = lazy(() => import('../pages/Apps/Contacts'));
+// const Contacts = lazy(() => import('../pages/Apps/Contacts-old'));
 const Chat = lazy(() => import('../pages/Apps/Chat'));
 const Scrumboard = lazy(() => import('../pages/Apps/Scrumboard'));
 const Calendar = lazy(() => import('../pages/Apps/Calendar'));
@@ -53,7 +53,7 @@ const DragAndDrop = lazy(() => import('../pages/DragAndDrop'));
 const Tables = lazy(() => import('../pages/Tables'));
 const Basic = lazy(() => import('../pages/DataTables/Basic'));
 const Advanced = lazy(() => import('../pages/DataTables/Advanced'));
-const Skin = lazy(() => import('../pages/DataTables/Skin'));
+const Contacts = lazy(() => import('../pages/DataTables/Contacts'));
 const OrderSorting = lazy(() => import('../pages/DataTables/OrderSorting'));
 const MultiColumn = lazy(() => import('../pages/DataTables/MultiColumn'));
 const MultipleTables = lazy(() => import('../pages/DataTables/MultipleTables'));
@@ -103,10 +103,13 @@ const Clipboard = lazy(() => import('../pages/Forms/Clipboard'));
 const ChangePassword = lazy(() => import('../pages/Authentication/ChangePassword'));
 const ChangeTxnPassword = lazy(() => import('../pages/Authentication/ChangeTxnPassword'));
 const Depositfund = lazy(() => import('../pages/Authentication/Depositfund'));
-const Qrpage = lazy(() => import('../pages/Authentication/Qrpage'));
+
 const Levelincome = lazy(() => import('../pages/DataTables/Levelincome'));
 const Roiincome = lazy(() => import('../pages/DataTables/Roiincome'));
 const Withdrawfund = lazy(() => import('../pages/Authentication/Withdrawfund'));
+const ReportStatus = lazy(() => import('../pages/Authentication/ReportStatus'));
+const CapitalWithdraw = lazy(() => import('../pages/Authentication/CapitalWithdraw'));
+const CapitalHistory = lazy(() => import('../pages/Authentication/CapitalHistory'));
 
 const routes = [
     // dashboard
@@ -344,10 +347,10 @@ const routes = [
         path: '/datatables/advanced',
         element: <Advanced />,
     },
-    {
-        path: '/datatables/skin',
-        element: <Skin />,
-    },
+    // {
+    //     path: '/datatables/skin',
+    //     element: <Skin />,
+    // },
     {
         path: '/datatables/order-sorting',
         element: <OrderSorting />,
@@ -476,17 +479,17 @@ const routes = [
         element: <Contacts />,
         layout: 'blank',
     },
-    {
-        path: '/qr-page',
-        element: <Qrpage />,
-        layout: 'blank',
-    },
+    // {
+    //     path: '/qr-page',
+    //     element: <Qrpage />,
+    //     layout: 'blank',
+    // },
 
-    {
-        path: '/direct-team',
-        element: <Skin />,
-        layout: 'blank',
-    },
+    // {
+    //     path: '/direct-team',
+    //     element: <Skin />,
+    //     layout: 'blank',
+    // },
 
     {
         path: '/my-downline',
@@ -513,6 +516,24 @@ const routes = [
         element: <Withdrawfund />,
         layout: 'blank',
     },
+
+    {
+        path: 'reportstatus',
+        element: <ReportStatus />,
+        layout: 'blank',
+    },
+    {
+        path: 'capitalwithdraw',
+        element: <CapitalWithdraw />,
+        layout: 'blank',
+    },
+    {
+        path: 'capitalhistory',
+        element: <CapitalHistory />,
+        layout: 'blank',
+    },
+
+    //
     {
         path: '/auth/boxed-signup',
         element: <RegisterBoxed />,

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { setPageTitle } from '../../store/themeConfigSlice';
+import { setPageTitle } from '../../Slice/themeConfigSlice';
 import { useEffect } from 'react';
 
 const Colorlibrary = () => {
@@ -24,9 +24,7 @@ const Colorlibrary = () => {
                 {/* main */}
                 <div>
                     <div className="w-fit mb-5">
-                        <h5 className="font-semibold text-base text-success bg-success/20 rounded px-3 py-1">
-                            Main Colors
-                        </h5>
+                        <h5 className="font-semibold text-base text-success bg-success/20 rounded px-3 py-1">Main Colors</h5>
                     </div>
                     <div className="mb-5">
                         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-7 font-semibold dark:text-white-dark mb-7">
@@ -165,9 +163,7 @@ const Colorlibrary = () => {
                 {/* more */}
                 <div>
                     <div className="w-fit mb-5">
-                        <h5 className="font-semibold text-sm sm:text-base text-success bg-success/20 rounded px-3 py-1">
-                            More Colors
-                        </h5>
+                        <h5 className="font-semibold text-sm sm:text-base text-success bg-success/20 rounded px-3 py-1">More Colors</h5>
                     </div>
                     <div>
                         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-7 font-semibold dark:text-white-dark">

@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import CodeHighlight from '../components/Highlight';
 import { useDispatch, useSelector } from 'react-redux';
-import { IRootState } from '../store';
+import { IRootState } from '../Slice';
 import ReactApexChart from 'react-apexcharts';
-import { setPageTitle } from '../store/themeConfigSlice';
+import { setPageTitle } from '../Slice/themeConfigSlice';
 import IconBell from '../components/Icon/IconBell';
 import IconCode from '../components/Icon/IconCode';
 
